@@ -1,0 +1,13 @@
+package com.cts.training.msms;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class MedicalStoreManagementSystemApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
