@@ -1,0 +1,42 @@
+<div class="col-md-6 offset-md-3">
+    <h3>Add Customer</h3>
+    <form (ngSubmit) = "onSubmit()">
+        <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" class="form-control" id="name"
+            [(ngModel)]="customer.name" name="name">
+        </div>
+
+        <div class="form-group">
+            <label>Village</label>
+            <input type="text" class="form-control" id="companyName"
+            [(ngModel)]="customer.village" name="village">
+        </div>
+
+        <div class="form-group">
+            <label>PinCode</label>
+            <input type="text" class="form-control" id="price"
+            [(ngModel)]="customer.pincode" name="pincode">
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" class="form-control" id="quantity"
+            [(ngModel)]="customer.phone" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label>UserName</label>
+            <input type="text" class="form-control" id="expiryDate"
+            [(ngModel)]="customer.username" name="username">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" id="category"
+            [(ngModel)]="customer.password" name="password">
+        </div>
+
+        <button class="btn btn-success" type="submit" value="Submit">Submit</button>
+    </form>
+</div>
