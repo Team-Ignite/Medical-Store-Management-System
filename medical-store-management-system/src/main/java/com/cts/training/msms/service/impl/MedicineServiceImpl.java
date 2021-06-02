@@ -59,4 +59,10 @@ public class MedicineServiceImpl implements MedicineService {
 		return medicineRepository.findByCategory(category);
 
 	}
+	
+	@Override
+	public void getAfterOrder(Long id, Integer quantity) {
+		medicineRepository.getQuantityAfterOrder(id, quantity);
+		
+	}
 }

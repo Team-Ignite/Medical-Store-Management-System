@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.training.msms.entity.Customer;
-import com.cts.training.msms.exception.ResourceNotFoundException;
 import com.cts.training.msms.service.CustomerService;
 
 @CrossOrigin("*")

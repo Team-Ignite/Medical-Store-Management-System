@@ -3,8 +3,6 @@ package com.cts.training.msms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -22,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.training.msms.entity.Medicine;
-import com.cts.training.msms.exception.ResourceNotFoundException;
-import com.cts.training.msms.repository.MedicineRepository;
 import com.cts.training.msms.service.MedicineService;
 
 @CrossOrigin("*")
@@ -82,11 +78,11 @@ public class MedicineController {
 //	public Medicine reduceOrderedQunatity(@PathVariable Long id, @RequestBody Long id1, Integer quantity) {
 //		Medicine medicineById = medicineService.getMedicineById(id1);
 //		if(medicineById.getQuantity()< quantity) {
-//			throw new ResourceNotFoundException("Qunatity less");
+//			throw new ResourceNotFoundException("Quantity less");
 //		}
 //		else {
 //			medicineById.setQuantity(medicineById.getQuantity() - quantity);
 //			return medicineService.updateMedicine(id1, medicineById);
 //		}
-
+		
 }

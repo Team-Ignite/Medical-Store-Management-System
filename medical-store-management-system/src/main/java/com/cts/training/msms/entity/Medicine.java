@@ -1,18 +1,28 @@
 package com.cts.training.msms.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Medicine")
-public class Medicine {
+public class Medicine implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "medicine_id", updatable = false)
@@ -41,6 +51,9 @@ public class Medicine {
 	@Column(name = "expiry_date", nullable = false)
 	@NotEmpty(message = "Medicine expiry date cannot be empty")
 	private String expiryDate;
+	
+	@OneToMany(targetEntity = Sales.class, mappedBy = "medicine")
+	private List<Sales> sales;
 	
 	public Medicine() {
 		super();

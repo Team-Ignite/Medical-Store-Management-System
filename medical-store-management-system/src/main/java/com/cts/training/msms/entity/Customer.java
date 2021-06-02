@@ -1,10 +1,13 @@
 package com.cts.training.msms.entity;
 
+import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,8 +18,13 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "Customer")
-public class Customer {
+public class Customer implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_id", updatable = false)
@@ -50,6 +58,9 @@ public class Customer {
 	@NotBlank(message = "Password cannot be empty")
 	@Size(min = 4, max = 10)
 	private String password;
+	
+	@OneToMany(targetEntity = Sales.class, mappedBy = "customer")
+	private List<Sales> sales;
 	
 	public Customer() {
 		super();
