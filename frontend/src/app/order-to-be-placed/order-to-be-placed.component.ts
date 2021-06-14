@@ -13,19 +13,19 @@ export class OrderToBePlacedComponent implements OnInit {
   medicineList: MedicineDetails[];
   data: Array<any>
   totalRecords: number
-  page:number = 1
+  page: number = 1
 
-  constructor(private service: MMServiceService, 
+  constructor(private service: MMServiceService,
     private router: Router) {
-      this.data = new Array<any>()
-     }
+    this.data = new Array<any>()
+  }
 
   ngOnInit(): void {
     this.getMedicine();
   }
 
   private getMedicine() {
-    this.service.getMedicineToOrder().subscribe(data =>{
+    this.service.getMedicineToOrder().subscribe(data => {
       console.log(data);
       this.medicineList = data;
       this.data = data;

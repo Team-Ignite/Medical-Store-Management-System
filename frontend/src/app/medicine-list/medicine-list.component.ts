@@ -11,22 +11,22 @@ import { MMServiceService } from '../mmservice.service';
 export class MedicineListComponent implements OnInit {
 
   medicineList: MedicineDetails[];
-  medicineName : String
+  medicineName: String
   data: Array<any>
   totalRecords: number
-  page:number = 1
+  page: number = 1
 
-  constructor(private service: MMServiceService, 
-    private router: Router) { 
-      this.data = new Array<any>()
-     }
+  constructor(private service: MMServiceService,
+    private router: Router) {
+    this.data = new Array<any>()
+  }
 
   ngOnInit(): void {
-    this.getMedicine();    
+    this.getMedicine();
   }
 
   private getMedicine() {
-    this.service.getMedicineList().subscribe(data =>{
+    this.service.getMedicineList().subscribe(data => {
       console.log(data);
       this.medicineList = data;
       this.data = data;
@@ -34,24 +34,24 @@ export class MedicineListComponent implements OnInit {
     });
   }
 
-  updateMedicine(id: number){
+  updateMedicine(id: number) {
     this.router.navigate(['update-medicine', id]);
   }
 
-  deleteMedicine(id: number){
-    this.service.deleteMedicine(id).subscribe(data =>{
+  deleteMedicine(id: number) {
+    this.service.deleteMedicine(id).subscribe(data => {
       console.log(data);
       this.getMedicine();
     })
   }
 
-  Search(){
-    if(this.medicineName != ""){
-      this.medicineList = this.medicineList.filter(res=>{
+  Search() {
+    if (this.medicineName != "") {
+      this.medicineList = this.medicineList.filter(res => {
         return res.name.toLocaleLowerCase().match(this.medicineName.toLocaleLowerCase());
       })
     }
-    else if(this.medicineName == ""){
+    else if (this.medicineName == "") {
       this.ngOnInit();
     }
   }

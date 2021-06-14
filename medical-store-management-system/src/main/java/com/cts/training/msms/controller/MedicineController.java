@@ -3,10 +3,11 @@ package com.cts.training.msms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,24 +31,26 @@ public class MedicineController {
 	@Autowired
 	private MedicineService medicineService;
 	
-	private final Logger LOGGER = LoggerFactory.getLogger(MedicineController.class);
+	private static final Logger LOGGER = LogManager.getLogger(MedicineController.class);
 	
 	//Get list of medicines
 	@GetMapping("/medicines")
-	public List<Medicine> getMedicines(){
-		LOGGER.info("Inside get all medicines in Medicine Controller");
+	public List<Medicine> getMedicine(){
+		LOGGER.info("Inside get all medicines method medicine controller");
 		return medicineService.getAllMedicines();
 	}
 	
 	//Add a medicine
 	@PostMapping("/medicines")
 	public Medicine createMedicine(@Valid @RequestBody Medicine medicine) {
+		LOGGER.info("Inside create medicine method medicine controller");
 		return medicineService.saveMedicine(medicine);		
 	}
 	
 	//Get a medicine by id
 	@GetMapping("/medicines/{id}")
 	public ResponseEntity<Medicine> getMedicineById(@PathVariable Long id) {
+		LOGGER.info("Inside get medicine by id method medicine controller");
 		Medicine medicine = medicineService.getMedicineById(id);
 		return ResponseEntity.ok(medicine);
 	}
@@ -55,6 +58,7 @@ public class MedicineController {
 	//Update medicine
 	@PutMapping("/medicines/{id}")
 	public ResponseEntity<Medicine> updateMedicineById(@Valid @PathVariable Long id, @RequestBody Medicine medicine){
+		LOGGER.info("Inside update medicine by id method medicine controller");
 		Medicine updatedMedicine = medicineService.updateMedicine(id, medicine);
 		return ResponseEntity.ok(updatedMedicine);
 	}
@@ -62,27 +66,19 @@ public class MedicineController {
 	//Delete Medicine
 	@DeleteMapping("medicines/{id}")
 	public ResponseEntity<Map<String,Boolean>> deleteMedicineById(@PathVariable Long id){
+		LOGGER.info("Inside delete medicine by id method medicine controller");
 		medicineService.deleteMedicine(id);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Medicine deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);		
-	}
-	
-	//Get medicines by category
-	@GetMapping("/medicines/category/{category}")
-	public Medicine getMedicineByCategory(@PathVariable String category){
-			return medicineService.getMedicineByCategory(category);
 	}	
 	
-//	@PutMapping("medicines/reduce/reducemedicine")
-//	public Medicine reduceOrderedQunatity(@PathVariable Long id, @RequestBody Long id1, Integer quantity) {
-//		Medicine medicineById = medicineService.getMedicineById(id1);
-//		if(medicineById.getQuantity()< quantity) {
-//			throw new ResourceNotFoundException("Quantity less");
-//		}
-//		else {
-//			medicineById.setQuantity(medicineById.getQuantity() - quantity);
-//			return medicineService.updateMedicine(id1, medicineById);
-//		}
+	//Order To Be Placed 
+	@GetMapping("/medicines/order")
+	public List<Medicine> getOrderTobePlaced(){
+		LOGGER.info("Inside get Orders of medicine to be placed method medicine controller");
+		return medicineService.getOrdersToBePlaced();
+		
+	}
 		
 }

@@ -11,4 +11,6 @@ public interface SalesService {
 
 	public List<Sales> getSales();
 
+	public List<Sales> getDailySales(String date);
+
 }

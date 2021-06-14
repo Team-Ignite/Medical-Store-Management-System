@@ -1,42 +1,42 @@
-<div class="col-md-6 offset-md-3">
-    <h3>Update Medicine</h3>
-    <form (ngSubmit) = "onSubmit()">
-        <div class="form-group">
-            <label>Medicine Name</label>
-            <input type="text" class="form-control" id="name"
-            [(ngModel)]="medicine.name" name="name">
-        </div>
+<div class="container"><br>
+    <div class="col-md-6 offset-md-3">
+        <h3 style="text-align: center;">Update Medicine</h3>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Medicine Name</label>
+                <input [disabled]="true" type="text" class="form-control" id="name" [(ngModel)]="medicine.name"
+                    name="name">
+            </div>
 
-        <div class="form-group">
-            <label>Medicine Company</label>
-            <input type="text" class="form-control" id="companyName"
-            [(ngModel)]="medicine.companyName" name="companyName">
-        </div>
+            <div class="form-group">
+                <label>Medicine Company</label>
+                <input [disabled]="true" type="text" class="form-control" id="companyName"
+                    [(ngModel)]="medicine.companyName" name="companyName">
+            </div>
 
-        <div class="form-group">
-            <label>Price</label>
-            <input type="text" class="form-control" id="price"
-            [(ngModel)]="medicine.price" name="price">
-        </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input type="text" class="form-control" id="price" [(ngModel)]="medicine.price" name="price">
+            </div>
 
-        <div class="form-group">
-            <label>Quantity</label>
-            <input type="text" class="form-control" id="quantity"
-            [(ngModel)]="medicine.quantity" name="quantity">
-        </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="text" class="form-control" id="quantity" [(ngModel)]="medicine.quantity" name="quantity">
+            </div>
 
-        <div class="form-group">
-            <label>Expiry Date</label>
-            <input type="text" class="form-control" id="expiryDate"
-            [(ngModel)]="medicine.expiryDate" name="expiryDate">
-        </div>
+            <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" class="form-control" id="expiryDate" [(ngModel)]="medicine.expiryDate"
+                    name="expiryDate">
+            </div>
 
-        <div class="form-group">
-            <label>Category</label>
-            <input type="text" class="form-control" id="category"
-            [(ngModel)]="medicine.category" name="category">
-        </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input [disabled]="true" type="text" class="form-control" id="category" [(ngModel)]="medicine.category"
+                    name="category">
+            </div><br>
 
-        <button class="btn btn-success" type="submit" value="Submit">Submit</button>
-    </form>
+            <button class="btn btn-success" type="submit" value="Submit">Submit</button>
+        </form>
+    </div><br>
 </div>

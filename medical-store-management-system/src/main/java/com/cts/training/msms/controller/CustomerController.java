@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.training.msms.entity.Customer;
 import com.cts.training.msms.service.CustomerService;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/msms/v1")
 public class CustomerController {
+	
+	private static final Logger LOGGER = LogManager.getLogger(CustomerController.class);
 	
 	@Autowired
 	private CustomerService customerService;
@@ -32,20 +36,13 @@ public class CustomerController {
 	//Get list of customers
 	@GetMapping("/customers")
 	public List<Customer> getCustomers(){
-		return customerService.getAllCustomers();
-	}
+		LOGGER.info("Inside get all customers method of customer controller");
+		return customerService.getAllCustomers();	}
 	
 	//Create a customer
 	@PostMapping("/customers")
 	public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
-//		Customer customerByPhoneNumber = customerService.getCustomerByPhoneNumber(customer);
-//		if(customer.getPhone() == customerByPhoneNumber.getPhone()) {
-//			throw new ResourceNotFoundException("Customer already exists");
-//		}
-//		else {
-//			Customer saveCustomer = customerService.saveCustomer(customer);
-//			return ResponseEntity.ok(saveCustomer);
-//		}
+		LOGGER.info("Inside create customer method of customer controller");
 		Customer saveCustomer = customerService.saveCustomer(customer);
 		return ResponseEntity.ok(saveCustomer);
 	}
@@ -54,6 +51,7 @@ public class CustomerController {
 	//Get a customer by id
 	@GetMapping("/customers/{id}")
 	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+		LOGGER.info("Inside get customer by id method of customer controller");
 		Customer customer = customerService.getCustomerById(id);
 		return ResponseEntity.ok(customer);		
 	}
@@ -61,6 +59,7 @@ public class CustomerController {
 	//Update a customer by id
 	@PutMapping("/customers/{id}")
 	public ResponseEntity<Customer> updateCustomerById(@Valid @PathVariable Long id, @RequestBody Customer customer){
+		LOGGER.info("Inside update customer by id method of customer controller");
 		Customer updateCustomer = customerService.updateCustomer(id, customer);	
 		return ResponseEntity.ok(updateCustomer);
 	}
@@ -68,6 +67,7 @@ public class CustomerController {
 	//Delete a customer by id
 	@DeleteMapping("/customers/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteCustomerById(@PathVariable Long id){
+		LOGGER.info("Inside delete customer by id method of customer controller");
 		customerService.deleteCustomer(id);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Customer Deleted", Boolean.TRUE);
@@ -75,23 +75,16 @@ public class CustomerController {
 	}
 	
 	//Get a customer by name
-	@GetMapping("/customers/name/{name}")
-	public Customer getCustomerByName(@PathVariable String name) {
-		return customerService.getCustomerByName(name);
+	@GetMapping("/customers/username/{username}")
+	public Customer getCustomerByName(@PathVariable String username) {
+		LOGGER.info("Inside get customer name of customer controller");
+		return customerService.getCustomerByUsername(username);
 		
 	}
 	
-	@GetMapping("/customers/validate")
-	public boolean validateCustomer(@RequestBody Customer customer) {
-		Customer findCustomer = customerService.getCustomerByUsernameAndPassword(customer);
-		if(findCustomer != null) {
-			return true;
-		}
-		return false;
-	}
-	
 	@GetMapping("/customers/phone/{phone}")
-	public Customer getCustomerByPhone(@RequestBody Customer customer) {
-		return customerService.getCustomerByPhoneNumber(customer);
+	public Customer getCustomerByPhone(@PathVariable String phone) {
+		LOGGER.info("Inside get customer by phone method of customer controller");
+		return customerService.getCustomerByPhoneNumber(phone);
 	}
 }	

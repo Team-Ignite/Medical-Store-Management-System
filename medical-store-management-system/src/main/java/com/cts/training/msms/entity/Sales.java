@@ -1,5 +1,5 @@
 package com.cts.training.msms.entity;
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +11,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sales")
-public class Sales {
+public class Sales implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -29,8 +34,23 @@ public class Sales {
 	
 	private Double amount;
 	
-	private Date date;
+	private String date;
 	
+	
+	public Sales() {
+		super();
+	}
+	
+	public Sales(Long id, Customer customer, Medicine medicine, Integer quantity, Double amount, String date) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.medicine = medicine;
+		this.quantity = quantity;
+		this.amount = amount;
+		this.date = date;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -61,10 +81,10 @@ public class Sales {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

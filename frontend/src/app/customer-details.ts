@@ -1,9 +1,9 @@
 export class CustomerDetails {
-    id:number;
-    name:String;
+    id: number;
+    name: String;
     village: String;
     pincode: String;
-    phone: String;
+    phone: string;
     username: String;
     password: String;
 }

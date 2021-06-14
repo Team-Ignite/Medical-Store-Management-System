@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -42,7 +41,7 @@ public class Medicine implements Serializable {
 	
 	@Column(name = "price_per_unit", nullable = false)
 	@NotNull(message = "Price of Medicine cannot be null")
-	private Integer price;
+	private double price;
 	
 	@Column(name = "category", nullable = false)
 	@NotEmpty(message = "Medicine category cannot be empty")
@@ -60,8 +59,9 @@ public class Medicine implements Serializable {
 	}
 
 	
-	public Medicine(String name, String companyName, Integer quantity, Integer price, String category, String expiryDate) {
+	public Medicine(Long id,String name, String companyName, Integer quantity, Integer price, String category, String expiryDate) {
 		super();
+		this.id= id;
 		this.name = name;
 		this.companyName = companyName;
 		this.quantity = quantity;
@@ -103,11 +103,11 @@ public class Medicine implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public Integer getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	

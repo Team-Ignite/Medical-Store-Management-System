@@ -16,8 +16,8 @@ public interface MedicineService {
 	
 	boolean deleteMedicine(Long id);
 	
-	Medicine getMedicineByCategory(String category);
-	
 	void getAfterOrder(Long id, Integer quantity);
+
+	List<Medicine> getOrdersToBePlaced();
 
 }

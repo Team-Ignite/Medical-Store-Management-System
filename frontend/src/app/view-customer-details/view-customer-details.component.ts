@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerDetails } from '../customer-details';
-import{ CustomerServiceService } from '../customer-service.service';
+import { CustomerServiceService } from '../customer-service.service';
 
 @Component({
   selector: 'app-view-customer-details',
@@ -11,22 +11,22 @@ import{ CustomerServiceService } from '../customer-service.service';
 export class ViewCustomerDetailsComponent implements OnInit {
 
   customerList: CustomerDetails[];
-  customerName : String
+  customerName: String
   data: Array<any>
   totalRecords: number
-  page:number = 1
+  page: number = 1
 
-  constructor(private service: CustomerServiceService, 
-    private router: Router) { 
-      this.data = new Array<any>()
-     }
+  constructor(private service: CustomerServiceService,
+    private router: Router) {
+    this.data = new Array<any>()
+  }
 
   ngOnInit(): void {
-    this.getCustomer();    
+    this.getCustomer();
   }
 
   private getCustomer() {
-    this.service.getCustomerList().subscribe(data =>{
+    this.service.getCustomerList().subscribe(data => {
       console.log(data);
       this.customerList = data;
       this.data = data;
@@ -34,27 +34,25 @@ export class ViewCustomerDetailsComponent implements OnInit {
     });
   }
 
-  updateCustomer(id: number){
+  updateCustomer(id: number) {
     this.router.navigate(['update-customer', id]);
   }
 
-  deleteCustomer(id: number){
-    this.service.deleteCustomer(id).subscribe(data =>{
+  deleteCustomer(id: number) {
+    this.service.deleteCustomer(id).subscribe(data => {
       console.log(data);
       this.getCustomer();
     })
   }
 
-  Search(){
-    if(this.customerName != ""){
-      this.customerList = this.customerList.filter(res=>{
+  Search() {
+    if (this.customerName != "") {
+      this.customerList = this.customerList.filter(res => {
         return res.name.toLocaleLowerCase().match(this.customerName.toLocaleLowerCase());
       })
     }
-    else if(this.customerName == ""){
+    else if (this.customerName == "") {
       this.ngOnInit();
     }
   }
-
-
 }

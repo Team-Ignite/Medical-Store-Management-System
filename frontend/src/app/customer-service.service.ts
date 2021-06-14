@@ -9,6 +9,7 @@ import{ CustomerDetails } from './customer-details';
 export class CustomerServiceService {
 
   baseurl="http://localhost:8998/msms/v1/customers";
+  
   constructor(private httpClient:HttpClient) { }
 
   getCustomerList(): Observable<CustomerDetails[]>{
@@ -29,5 +30,17 @@ export class CustomerServiceService {
 
   deleteCustomer(id: number): Observable<Object>{
     return this.httpClient.delete(`${this.baseurl}/${id}`);
+  }
+
+  getCustomerByPhone(phone : string): Observable<CustomerDetails>{
+    return this.httpClient.get<CustomerDetails>(`${this.baseurl}/`+'phone/' + phone);
+  }
+
+  getCustomerByUsername(username: String): Observable<CustomerDetails>{
+    return this.httpClient.get<CustomerDetails>(`${this.baseurl}/`+'username/' + username);
+  }
+
+  getCustomerByUsernameAndPassword(customer:CustomerDetails):Observable<CustomerDetails>{
+    return this.httpClient.post<CustomerDetails>(`${this.baseurl}/`+'login',customer);
   }
 }

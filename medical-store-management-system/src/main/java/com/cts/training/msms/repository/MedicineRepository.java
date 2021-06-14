@@ -1,5 +1,7 @@
 package com.cts.training.msms.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +20,9 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 	Medicine findByName(String name);
 	
 	Medicine findByIdAndQuantity(Long id, String quantity);
+	
+	@Query(value = "from Medicine where quantity < 25")
+	List<Medicine> findOrderTobePlaced();
 	
 	@Transactional
 	@Modifying

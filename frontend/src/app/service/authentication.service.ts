@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { CustomerDetails } from '../customer-details';
+import { CustomerServiceService } from '../customer-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  customer: CustomerDetails = new CustomerDetails();
+  constructor(private service: CustomerServiceService) { }
 
   authenticate(username, password) {
     if (username === "admin" && password === "admin@123") {
@@ -18,7 +21,6 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username')
-    console.log(!(user === null))
     return !(user === null)
   }
 

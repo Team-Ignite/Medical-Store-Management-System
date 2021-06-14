@@ -49,7 +49,7 @@ public class Customer implements Serializable {
 	@NotNull
 	private String phone;
 	
-	@Column(name = "username", unique = true)
+	@Column(name = "username")
 	@NotBlank(message = "UserName cannot be empty")
 	@Length(min = 5, max = 15)
 	private String username;
@@ -66,8 +66,9 @@ public class Customer implements Serializable {
 		super();
 	}
 
-	public Customer(String name, String village, String pincode, String phone, String username, String password) {
+	public Customer(Long id, String name, String village, String pincode, String phone, String username, String password) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.village = village;
 		this.pincode = pincode;
@@ -130,5 +131,36 @@ public class Customer implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		return true;
 	}
 }

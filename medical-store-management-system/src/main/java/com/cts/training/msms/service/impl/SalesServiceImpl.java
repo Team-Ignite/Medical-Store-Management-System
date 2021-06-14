@@ -1,6 +1,7 @@
 package com.cts.training.msms.service.impl;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import com.cts.training.msms.exception.ResourceNotFoundException;
 import com.cts.training.msms.repository.CustomerRepository;
 import com.cts.training.msms.repository.MedicineRepository;
 import com.cts.training.msms.repository.SalesRepository;
-import com.cts.training.msms.service.CustomerService;
 import com.cts.training.msms.service.MedicineService;
 import com.cts.training.msms.service.SalesService;
 
@@ -32,28 +32,28 @@ public class SalesServiceImpl implements SalesService {
 	
 	@Autowired
 	private MedicineService medicineService;
-	
-	@Autowired
-	private CustomerService customerService;
-	
+		
 	@Override
 	public Sales addSale(SalesDTO salesDTO) {
 		Sales sales = new Sales();
-		//Medicine medicine = medicineRepository.findByName(salesDTO.getMedicineName());
+		LocalDate today = LocalDate.now();		 
+		String formattedDate = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		Medicine medicine = medicineService.getMedicineById(salesDTO.getMedicineId());
-		//Customer customer = customerRepository.findByPhone(salesDTO.getCustomerPhone());
-		Customer customer = customerService.getCustomerById(salesDTO.getCustomerId());
+		Customer customer = customerRepository.findByPhone(salesDTO.getCustomerPhone());
 		if(medicine.getQuantity()<salesDTO.getQuantity()) {
 			throw new ResourceNotFoundException("Required quantity Not available");
-		}else {
+		}else if(customer!=null) {
 		sales.setMedicine(medicine);
 		sales.setCustomer(customer);
 		sales.setQuantity(salesDTO.getQuantity());
-		sales.setAmount((double) (salesDTO.getQuantity() * medicine.getPrice()));
-		sales.setDate(new Date());
+		sales.setAmount(((double)salesDTO.getQuantity() * medicine.getPrice()));
+		sales.setDate(formattedDate);
 		Sales saveSales = salesRepository.save(sales);
 		medicineRepository.getQuantityAfterOrder(medicine.getId(), salesDTO.getQuantity());
 		return saveSales;
+		}
+		else {
+			throw new ResourceNotFoundException("Customer Phone Number Not available");
 		}
 	}
 
@@ -61,6 +61,11 @@ public class SalesServiceImpl implements SalesService {
 	public List<Sales> getSales() {
 		List<Sales> salesList = salesRepository.findAll();
 		return salesList;
+	}
+
+	@Override
+	public List<Sales> getDailySales(String date) {
+		return salesRepository.getDailySales(date);
 	}
 
 }

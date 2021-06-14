@@ -23,16 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer saveCustomer(Customer customer) {
-//		Customer customer2 = customerRepository.findByPhone(customer.getPhone());
-//		if(customer2.getPhone() != customer.getPhone()) {
 			return customerRepository.save(customer);			
-//		}
-//		else {
-//			throw new ResourceNotFoundException("Customer already exists");
-//		}
-		
 	}
-
+		
 	@Override
 	public Customer getCustomerById(Long id) {
 		return customerRepository.findById(id)
@@ -62,18 +55,21 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerByName(String name) {
-		return customerRepository.findByName(name);
+	public Customer getCustomerByUsername(String username) {
+		Customer customer = customerRepository.findByUsername(username);
+		if(customer != null) {
+			return customer;
+		}
+		else {
+			throw new ResourceNotFoundException("Customer doesn't exist");
+		}
 	}
 
 	@Override
-	public Customer getCustomerByUsernameAndPassword(Customer customer) {
-		return customerRepository.findByUsernameAndPassword(customer.getUsername(), customer.getPassword());
-		
+	public Customer getCustomerByPhoneNumber(String phone) {
+		return customerRepository.findByPhone(phone);
 	}
 
-	@Override
-	public Customer getCustomerByPhoneNumber(Customer customer) {
-		return customerRepository.findByPhone(customer.getPhone());
-	}
+
+	
 }

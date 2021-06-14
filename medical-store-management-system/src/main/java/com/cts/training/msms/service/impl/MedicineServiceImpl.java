@@ -53,16 +53,15 @@ public class MedicineServiceImpl implements MedicineService {
 		medicineRepository.delete(medicine);
 		return true;
 	}
-
-	@Override
-	public Medicine getMedicineByCategory(String category) {
-		return medicineRepository.findByCategory(category);
-
-	}
 	
 	@Override
 	public void getAfterOrder(Long id, Integer quantity) {
 		medicineRepository.getQuantityAfterOrder(id, quantity);
 		
+	}
+
+	@Override
+	public List<Medicine> getOrdersToBePlaced() {
+		return medicineRepository.findOrderTobePlaced();
 	}
 }

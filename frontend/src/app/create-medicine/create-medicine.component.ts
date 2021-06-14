@@ -10,27 +10,26 @@ import { MMServiceService } from '../mmservice.service';
 })
 export class CreateMedicineComponent implements OnInit {
 
-  medicine:MedicineDetails = new MedicineDetails();
+  medicine: MedicineDetails = new MedicineDetails();
   constructor(private createService: MMServiceService,
     private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  saveMedicine(){
-    this.createService.createMedicine(this.medicine).subscribe(data=>{
+  saveMedicine() {
+    this.createService.createMedicine(this.medicine).subscribe(data => {
       console.log(data);
       this.goToMedicineList();
     },
-    error => console.error(error));
+      error => console.error(error));
   }
 
-  goToMedicineList(){
+  goToMedicineList() {
     this.router.navigate(['/medicine'])
   }
-  onSubmit(){
+  onSubmit() {
     console.log(this.medicine);
     this.saveMedicine();
   }
-
 }

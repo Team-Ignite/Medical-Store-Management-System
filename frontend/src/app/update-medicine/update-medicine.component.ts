@@ -10,11 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpdateMedicineComponent implements OnInit {
 
-  id:number;
-  medicine : MedicineDetails = new MedicineDetails();
+  id: number;
+  medicine: MedicineDetails = new MedicineDetails();
   constructor(private service: MMServiceService,
     private route: ActivatedRoute,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -24,13 +24,13 @@ export class UpdateMedicineComponent implements OnInit {
     }, error => console.log(error));
   }
 
-  goToMedicineList(){
+  goToMedicineList() {
     this.router.navigate(['/medicine'])
   }
 
-  onSubmit(){
-    this.service.updateMedicine(this.id, this.medicine).subscribe(data =>{
+  onSubmit() {
+    this.service.updateMedicine(this.id, this.medicine).subscribe(data => {
       this.goToMedicineList();
-    },error => console.log(error));
+    }, error => console.log(error));
   }
 }

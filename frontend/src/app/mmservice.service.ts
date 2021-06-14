@@ -8,30 +8,30 @@ import { MedicineDetails } from './medicine-details';
 })
 export class MMServiceService {
 
-  baseurl="http://localhost:8998/msms/medicines";
-  constructor(private httpClient:HttpClient) { }
+  baseurl = "http://localhost:8998/msms/v1/medicines";
+  constructor(private httpClient: HttpClient) { }
 
-  getMedicineList(): Observable<MedicineDetails[]>{
+  getMedicineList(): Observable<MedicineDetails[]> {
     return this.httpClient.get<MedicineDetails[]>(`${this.baseurl}`);
   }
 
-  createMedicine(medicine:MedicineDetails): Observable<Object>{
+  createMedicine(medicine: MedicineDetails): Observable<Object> {
     return this.httpClient.post(`${this.baseurl}`, medicine);
   }
 
-  getMedicineListById(id: number): Observable<MedicineDetails>{
+  getMedicineListById(id: number): Observable<MedicineDetails> {
     return this.httpClient.get<MedicineDetails>(`${this.baseurl}/${id}`);
   }
-  
-  updateMedicine(id: number, medicine:MedicineDetails): Observable<Object>{
+
+  updateMedicine(id: number, medicine: MedicineDetails): Observable<Object> {
     return this.httpClient.put(`${this.baseurl}/${id}`, medicine);
   }
 
-  deleteMedicine(id: number): Observable<Object>{
+  deleteMedicine(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseurl}/${id}`);
   }
 
-  getMedicineToOrder(): Observable<MedicineDetails[]>{
-    return this.httpClient.get<MedicineDetails[]>(`${this.baseurl}`+'/order');
+  getMedicineToOrder(): Observable<MedicineDetails[]> {
+    return this.httpClient.get<MedicineDetails[]>(`${this.baseurl}` + '/order');
   }
 }

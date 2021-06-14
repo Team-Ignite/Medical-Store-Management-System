@@ -7,7 +7,7 @@ import { AuthenticationService } from './service/authentication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public loginService:AuthenticationService) { }
+  constructor(public loginService: AuthenticationService) { }
 
 
   title = 'MMS';

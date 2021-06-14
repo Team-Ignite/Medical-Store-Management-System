@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MedicineListComponent } from './medicine-list/medicine-list.component';
 import { CreateMedicineComponent } from './create-medicine/create-medicine.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateMedicineComponent } from './update-medicine/update-medicine.component';
@@ -16,6 +16,15 @@ import { CustomerViewMedicineComponent } from './customer-view-medicine/customer
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { ViewCustomerDetailsComponent } from './view-customer-details/view-customer-details.component';
 import { OrderToBePlacedComponent } from './order-to-be-placed/order-to-be-placed.component';
+import { UpdateCustomerComponent } from './update-customer/update-customer.component';
+import { MedicineSalestoCustomerComponent } from './medicine-salesto-customer/medicine-salesto-customer.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { FooterComponent } from './footer/footer.component';
+import { CustomerRegistrationLoginComponent } from './customer-registration-login/customer-registration-login.component';
+import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { DailySalesTrackerComponent } from './daily-sales-tracker/daily-sales-tracker.component';
+import { AddCustomerByAdminComponent } from './add-customer-by-admin/add-customer-by-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +38,16 @@ import { OrderToBePlacedComponent } from './order-to-be-placed/order-to-be-place
     CustomerViewMedicineComponent,
     CreateCustomerComponent,
     ViewCustomerDetailsComponent,
-    OrderToBePlacedComponent
+    OrderToBePlacedComponent,
+    UpdateCustomerComponent,
+    MedicineSalestoCustomerComponent,
+    AdminHeaderComponent,
+    AdminHomeComponent,
+    FooterComponent,
+    CustomerRegistrationLoginComponent,
+    CustomerHomeComponent,
+    DailySalesTrackerComponent,
+    AddCustomerByAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +55,8 @@ import { OrderToBePlacedComponent } from './order-to-be-placed/order-to-be-place
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
